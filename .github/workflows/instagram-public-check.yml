@@ -1,0 +1,35 @@
+
+name: Instagram public-page diagnostic
+
+on:
+  workflow_dispatch:
+    inputs:
+      username:
+        description: Instagram public username (without @)
+        required: true
+        default: eatdrinkplayshare
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  public-page-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+
+    steps:
+      - name: Checkout test branch
+        uses: actions/checkout@v4
+        with:
+          ref: test/instagram-public-check
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check public Instagram profile page
+        env:
+          IG_USERNAME: ${{ inputs.username }}
+        run: python instagram_public_check.py "$IG_USERNAME"
