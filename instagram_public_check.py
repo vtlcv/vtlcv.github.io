@@ -15,7 +15,7 @@ import urllib.request
 
 def main():
     username = (
-        sys.argv[1] if len(sys.argv) > 1 else "virwez_v"
+        sys.argv[1] if len(sys.argv) > 1 else "eatdrinkplayshare"
     ).strip().lstrip("@").strip("/")
 
     if not re.fullmatch(r"[A-Za-z0-9._]{1,30}", username):
