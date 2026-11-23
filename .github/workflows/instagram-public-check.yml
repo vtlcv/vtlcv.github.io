@@ -2,13 +2,9 @@
 name: Instagram public-page diagnostic
 
 on:
-  workflow_dispatch:
-    inputs:
-      username:
-        description: Instagram public username (without @)
-        required: true
-        default: eatdrinkplayshare
-        type: string
+  push:
+    branches:
+      - test/instagram-public-check
 
 permissions:
   contents: read
@@ -30,6 +26,4 @@ jobs:
           python-version: "3.11"
 
       - name: Check public Instagram profile page
-        env:
-          IG_USERNAME: ${{ inputs.username }}
-        run: python instagram_public_check.py "$IG_USERNAME"
+        run: python instagram_public_check.py eatdrinkplayshare
